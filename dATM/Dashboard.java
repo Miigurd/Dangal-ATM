@@ -22,6 +22,9 @@ public class Dashboard extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private BufferedImage backgroundImage;
+	private Balance balance;
+	private Withdraw withdraw;
+	private String account[];
 
 	/**
 	 * Launch the application.
@@ -30,7 +33,7 @@ public class Dashboard extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Dashboard frame = new Dashboard();
+					Dashboard frame = new Dashboard(new String[]{"", "", ""});
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -43,7 +46,9 @@ public class Dashboard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Dashboard() {
+	public Dashboard(String[] account) {
+		this.account = account;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1024, 768);
 
@@ -74,40 +79,52 @@ public class Dashboard extends JFrame {
 		
 		// Custom panel for logo image
 		JPanel logoPanel = new ImagePanel("C:\\Users\\Kirt Asia\\Desktop\\School\\1CS-A\\2nd Sem\\CCS103\\dATM img\\Dangal ATM Dashboard.png");
-		logoPanel.setBounds(350, 80, 250, 100);
+		logoPanel.setBounds(175, 15, 200, 80);
 		contentPane.add(logoPanel);
 		
 		JButton CBbtn = new JButton("Check Balance");
-		CBbtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		CBbtn.setText("Check Balance");
+		
+		CBbtn.setText("CHECK BALANCE");
 		CBbtn.setForeground(new Color(0, 102, 51));
-		CBbtn.setFont(new Font("Poppins Medium", Font.BOLD, 25));
-		CBbtn.setBounds(87, 258, 278, 71);
+		CBbtn.setFont(new Font("Poppins Medium", Font.BOLD, 40));
+		CBbtn.setBounds(55, 108, 435, 159);
 		CBbtn.setBackground(new Color(153, 204, 153));
 		contentPane.add(CBbtn);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton withdrawBtn = new JButton("WITHDRAW");
 		
-		btnNewButton_1.setFont(new Font("Poppins Medium", Font.BOLD, 25));
-		btnNewButton_1.setBackground(new Color(153, 204, 153));
-		btnNewButton_1.setForeground(new Color(0, 102, 51));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		withdrawBtn.setFont(new Font("Poppins Medium", Font.BOLD, 40));
+		withdrawBtn.setBackground(new Color(153, 204, 153));
+		withdrawBtn.setForeground(new Color(0, 102, 51));
+		withdrawBtn.setBounds(55, 309, 435, 159);
+		contentPane.add(withdrawBtn);
+		
+		JButton deposit = new JButton("DEPOSIT");
+		deposit.setFont(new Font("Poppins Medium", Font.BOLD, 40));
+		deposit.setForeground(new Color(0, 102, 51));
+		deposit.setBackground(new Color(153, 204, 153));
+		deposit.setBounds(55, 506, 435, 159);
+		contentPane.add(deposit);
+		
+//		------------- EVENTS -----------
+		
+		CBbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Add action code here
+				balance = new Balance(account);
+				balance.setVisible(true);
+				balance.setLocationRelativeTo(null);
+				Dashboard.this.dispose();
 			}
 		});
-		btnNewButton_1.setBounds(87, 381, 278, 71);
-		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("New button");
-		btnNewButton_1_1.setFont(new Font("Poppins Medium", Font.BOLD, 25));
-		btnNewButton_1_1.setForeground(new Color(0, 102, 51));
-		btnNewButton_1_1.setBackground(new Color(153, 204, 153));
-		btnNewButton_1_1.setBounds(87, 506, 278, 71);
-		contentPane.add(btnNewButton_1_1);
+		withdrawBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				withdraw = new Withdraw(account);
+				withdraw.setVisible(true);
+				withdraw.setLocationRelativeTo(null);
+				Dashboard.this.dispose();
+			}
+		});
 	}
 
 	// Custom JPanel class for displaying an image

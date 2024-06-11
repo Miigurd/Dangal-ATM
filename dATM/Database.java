@@ -11,7 +11,7 @@ public class Database extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String[] header = {"STUDENT NUMBER", "NAME", "BALANCE"};
+	private String[] header = {"STUDENT NUMBER", "FIRST NAME", "LAST NAME"};
 	private String[][] data = {{"2300650", "MAG-USARA, KIRT ASIA", "69420.00"},
 							   {"2300649", "FATAL, MOISES JR.", "42690.00"},
 							   {"2300646", "FARINAS, JORICK CHRISTIAN", "10000.00"},
